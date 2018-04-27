@@ -7,7 +7,7 @@ let missed = 0;
 let buttonReset = document.getElementsByClassName("btn__reset");
 // movie phrases held in array
 let phraseArray = [
-    "Louis I think this is the beginning of a beautiful friendship.",
+    "Louis I think this is the beginning of a beautiful friendship",
     "If you build it they will come",
     "I see dead people",
     "Elementary my dear Watson",
@@ -19,6 +19,16 @@ let phraseArray = [
     "I know kung fu",
 
 ];
+
+let phraseLetters= getRandomPhraseArray(phraseArray);
+let match = false;
+let lostLife = document.querySelectorAll("img");
+let letterfound= null;
+let buttonPressed = 0;
+let buttons = document.getElementsByClassName("letter");
+
+
+
 
 // event listener to hide overlay 
 window.addEventListener('click', (event) => {
@@ -38,9 +48,9 @@ window.addEventListener('click', (event) => {
     return splitQuote;
        
  };
- let phraseLetters= getRandomPhraseArray(phraseArray);
+ //let phraseLetters= getRandomPhraseArray(phraseArray);
 
-//function to create list item, append to ul and check for whitespace.
+//function to create list of letter in phrase, append to ul and check for  whitespace.
 function addPhraseToDisplay (letters){
     let list = document.getElementsByTagName('ul');
 
@@ -54,37 +64,65 @@ function addPhraseToDisplay (letters){
             li.className +='letter';
        } else {
            li.className +='space';
-       }
+       };
     };
 };
 // call addPhraseToDisplay function
 addPhraseToDisplay (phraseLetters);
  
 
-// function that checks for pressed letter match in phrase and disable choice.
+// function that checks for pressed letter match in phrase and reveals the right letter
 
 
-function checkletter (qrty){
+// This one almost works   funky behavior
+   function checkletter (qrty){
     let buttons = document.getElementsByClassName("letter");
     console.log(buttons);
     console.log(event.target.innerHTML);
-    for (i=0; i<buttons.length; i++){
-
-        if(event.target.innerHTML == buttons[i].innerHTML){
+    letterfound=null;
+    for (i=0; i< buttons.length; i++){
+        let buttonPressed = event.target.innerHTML;
+        if(buttonPressed == buttons[i].innerHTML){
             console.log(buttons[i].innerHTML);
+            letterfound= buttonPressed;
             buttons[i].className += ' show';
-            
-        }else{
-            
-            
-           // return null;
-        }
-    };  
-      event.target.className += "chosen";
+            console.log(letterfound);
+        };   
+    }; 
+  };  
 
+// listener for clicked button and removes heart if no match.
+//===========================
+qrty.addEventListener('click',function (e){
+    checkletter();
+    
+    if (event.target.tagName ==="BUTTON"){
+        event.target.className += "chosen";
         event.target.disabled=true;
+    };    
+
+    if (letterfound ===null){
+        lostLife[missed].src="images/lostHeart.png";
+
+        console.log("letterfound should now be null");
+        console.log(letterfound);
+        console.log(missed);
+    
+        if (missed >= 0|| missed < 5){
+            lostLife[missed].src="images/lostHeart.png";
+            
+        }  
+        missed += 1;
+    };  
+    checkWin();
+});
+ 
+function checkWin () {
+let shownLetters = document.elementsByClassName("show");
+console.log(shownLetters);
+if(shownLetters.length== letter.length){
+
+}
 
 };
 
-// event listener on keyboard.
-qrty.addEventListener('click', checkletter, false);
