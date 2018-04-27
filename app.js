@@ -91,6 +91,20 @@ addPhraseToDisplay (phraseLetters);
     }; 
   };  
 
+  function checkWin() {
+    let shownLetters = document.getElementsByClassName("show");
+    let letter = document.getElementsByClassName("letter");
+    console.log(shownLetters);
+        if(shownLetters.length == letter.length){
+            alert("you win");
+        };
+    
+    };
+
+
+
+
+
 // listener for clicked button and removes heart if no match.
 //===========================
 qrty.addEventListener('click',function (e){
@@ -113,16 +127,12 @@ qrty.addEventListener('click',function (e){
             
         }  
         missed += 1;
-    };  
-    checkWin();
+        checkWin();
+    } 
+    else{
+        checkWin();
+    }
 });
  
-function checkWin () {
-let shownLetters = document.elementsByClassName("show");
-console.log(shownLetters);
-if(shownLetters.length== letter.length){
 
-}
-
-};
 
