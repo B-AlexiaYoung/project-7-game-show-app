@@ -92,6 +92,7 @@ addPhraseToDisplay (phraseLetters);
     //console.log(shownLetters.length);
     //console.log(letter.length);
         if(shownLetters.length == letter.length){
+            showOverlay.classList.remove("lose");
             showOverlay.className +=" win";
             showOverlay.style.display ="flex";
             console.log(showOverlay.className);
@@ -99,6 +100,7 @@ addPhraseToDisplay (phraseLetters);
             const setNewTitle = document.getElementById("titleSet").innerHTML= "Winner!";
             resetGame ();
         } else if(missed >= 5){
+            showOverlay.classList.remove("win");
             showOverlay.className += " lose";
             showOverlay.style.display = "flex";
             document.getElementsByTagName("H2")[0].setAttribute("id", "titleSet");
@@ -114,7 +116,6 @@ qrty.addEventListener('click',function (e){
     if (event.target.tagName ==="BUTTON"){
         event.target.className += "chosen";
         event.target.disabled=true;
-    };    
 
     if (letterfound ===null){
         lostLife[missed].src="images/lostHeart.png";
@@ -133,6 +134,8 @@ qrty.addEventListener('click',function (e){
     else{
         checkWin();    
     }
+};    
+
 });
  
 function resetGame(){
@@ -172,4 +175,10 @@ missed = 0;
 for(i=0; i<lostLife.length; i++){
     lostLife[i].src="images/liveHeart.png";
 }
+
+// remove win or lose class from overlay
+/*   let showOverlay = document.getElementById("overlay");
+showOverlay.classList.remove("win");
+showOverlay.classList.remove("lose");
+console.log(showOverlay.classList);     */
 };
